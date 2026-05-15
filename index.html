@@ -67,23 +67,23 @@
         <output></output>
       </fieldset>
     </form>
-
+    
     <section id="error-btns">
-      <button>Console Log</button>
-      <button>Console Error</button>
-      <button>Console Count</button>
-      <button>Console Warn</button>
-      <button>Console Assert</button>
-      <button>Console Clear</button>
-      <button>Console Dir</button>
-      <button>Console dirxml</button>
-      <button>Console Group Start</button>
-      <button>Console Group End</button>
-      <button>Console Table</button>
-      <button>Start Timer</button>
-      <button>End Timer</button>
-      <button>Console Trace</button>
-      <button>Trigger a Global Error</button>
+      <button id="log">Console Log</button>
+      <button id="error">Console Error</button>
+      <button id="count">Console Count</button>
+      <button id="warn">Console Warn</button>
+      <button id="assert">Console Assert</button>
+      <button id="clear">Console Clear</button>
+      <button id="dir">Console Dir</button>
+      <button id="dirxml">Console dirxml</button>
+      <button id="group-start">Console Group Start</button>
+      <button id="group-end">Console Group End</button>
+      <button id="table">Console Table</button>
+      <button id="start-timer">Start Timer</button>
+      <button id="end-timer">End Timer</button>
+      <button id="trace">Console Trace</button>
+      <button id="global-error">Trigger a Global Error</button>
     </section>
   </main>
 
@@ -102,6 +102,60 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    errorBtns.forEach((button) => {
+      button.addEventListener('click', (event) => {
+          switch (button.id) {
+          case "log":
+            console.log("Console Log Demo");
+            break; 
+          case "error":
+            console.error("Console Error Demo");
+            break;
+          case "count":
+            console.count("Count Button"); 
+            break;
+          case "warn": 
+            console.warn("Console Warn Button");
+            break;
+          case "assert": 
+            console.assert(2+2 == 5);
+            break;
+          case "clear": 
+            console.clear();
+            break;
+          case "dir": 
+            console.dir(button);
+            break;
+          case "dirxml": 
+            console.dirxml(button);
+            break;
+          case "group-start": 
+            console.group("console.group");
+            break;
+          case "group-end": 
+            console.groupEnd();
+            break;
+          case "table": 
+            console.table(errorBtns);
+            break;
+          case "start-timer": 
+            console.time("timer-button");
+            break;
+          case "end-timer": 
+            console.timeEnd("timer-button");
+            break;
+          case "trace": 
+            const deepest = () => {console.trace("Console Trace Demo")};
+            const deeper = () => {deepest()};
+            const deep = () => {deeper()};
+            deep();
+            break;
+          case "global-error":
+        }
+      })
+      
+    })
+
   </script>
 </body>
 
