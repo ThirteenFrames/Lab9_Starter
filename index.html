@@ -86,6 +86,15 @@
       <button id="global-error">Trigger a Global Error</button>
     </section>
   </main>
+  
+  
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    // part 5
+    window.TrackJS && TrackJS.install({ 
+      token: "f81984b1163a422d9000cfe4397fa00d"
+    });
+  </script>
 
   <script>
     let form = document.querySelector('form');
@@ -95,13 +104,43 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+
+
+      // part 4
+      class CalculationError extends Error {
+        constructor(message) {
+          super(message);
+          this.name = "CalculationError";
+        }
+      }
+
+      // part 3
+      try {
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (e) {
+        alert("Check your inputs and try again!");
+
+        // part 4
+        throw new CalculationError("invalid arguments for calculation.");
+
+      } finally {
+        console.log("Calculation attempted!")
+      }
+      
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+
+    // part 5
+    window.onerror = function(message, source, lineno, colno, error) {
+      console.log("Global Error Caught");
+    };
+
+    // part 2
     errorBtns.forEach((button) => {
       button.addEventListener('click', (event) => {
           switch (button.id) {
@@ -150,7 +189,11 @@
             const deep = () => {deeper()};
             deep();
             break;
+          // part 5
           case "global-error":
+            let arr = undefined;
+            console.log(arr.length); // should cause uncaught error
+            break;
         }
       })
       
